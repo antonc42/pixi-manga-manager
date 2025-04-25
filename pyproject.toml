@@ -1,0 +1,38 @@
+[project]
+name = "pixi-manga-manager"
+version = "0.1.0"
+description = "Flexible manga library organizer, metadata scraper, and renamer"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+license = "AGPL-3.0-or-later"
+license-files = ["LICENSE"]
+authors = [
+    {name = "Anton Castelli", email = "anton.c42@gmail.com"},
+]
+maintainers = []
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+[project.urls]
+Homepage = "https://github.com/antonc42/pixi-manga-manager"
+Documentation = "https://github.com/antonc42/pixi-manga-manager/blob/main/README.md"
+Repository = "https://github.com/antonc42/pixi-manga-manager.git"
+Issues = "https://github.com/antonc42/pixi-manga-manager/issues"
+#Changelog = ""
+
+[dependency-groups]
+dev = [
+    "pylint",
+    "black",
+    "isort",
+    "rust-just",
+    "mypy",
+    "briefcase",
+]
