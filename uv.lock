@@ -1,6 +1,12 @@
 version = 1
 revision = 1
 requires-python = ">=3.12"
+resolution-markers = [
+    "sys_platform != 'linux' and 'freebsd' in sys_platform",
+    "sys_platform != 'linux' and 'freebsd' not in sys_platform",
+    "sys_platform == 'linux' and 'freebsd' in sys_platform",
+    "sys_platform == 'linux' and 'freebsd' not in sys_platform",
+]
 
 [[package]]
 name = "anyio"
@@ -104,7 +110,7 @@ name = "build"
 version = "1.2.2.post1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "os_name == 'nt'" },
+    { name = "colorama", marker = "os_name == 'nt' and sys_platform != 'linux'" },
     { name = "packaging" },
     { name = "pyproject-hooks" },
 ]
@@ -120,6 +126,21 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/1c/ab/c9f1e32b7b1bf505bf26f0ef697775960db7932abeb7b516de930ba2705f/certifi-2025.1.31.tar.gz", hash = "sha256:3d5da6925056f6f18f119200434a4780a94263f10d1c21d032a6f6b2baa20651", size = 167577 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/38/fc/bce832fd4fd99766c04d1ee0eead6b0ec6486fb100ae5e74c1d91292b982/certifi-2025.1.31-py3-none-any.whl", hash = "sha256:ca78db4565a652026a4db2bcdf68f2fb589ea80d0be70e03929ed730746b84fe", size = 166393 },
+]
+
+[[package]]
+name = "cffi"
+version = "1.17.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pycparser", marker = "sys_platform != 'linux'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/fc/97/c783634659c2920c3fc70419e3af40972dbaf758daa229a7d6ea6135c90d/cffi-1.17.1.tar.gz", hash = "sha256:1c39c6016c32bc48dd54561950ebd6836e1670f2ae46128f67cf49e789c52824", size = 516621 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/86/c5/28b2d6f799ec0bdecf44dced2ec5ed43e0eb63097b0f58c293583b406582/cffi-1.17.1-cp312-cp312-win32.whl", hash = "sha256:a08d7e755f8ed21095a310a693525137cfe756ce62d066e53f502a83dc550f65", size = 172448 },
+    { url = "https://files.pythonhosted.org/packages/50/b9/db34c4755a7bd1cb2d1603ac3863f22bcecbd1ba29e5ee841a4bc510b294/cffi-1.17.1-cp312-cp312-win_amd64.whl", hash = "sha256:51392eae71afec0d0c8fb1a53b204dbb3bcabcb3c9b807eedf3e1e6ccf2de903", size = 181976 },
+    { url = "https://files.pythonhosted.org/packages/bf/ee/f94057fa6426481d663b88637a9a10e859e492c73d0384514a17d78ee205/cffi-1.17.1-cp313-cp313-win32.whl", hash = "sha256:e03eab0a8677fa80d646b5ddece1cbeaf556c313dcfac435ba11f107ba117b5d", size = 172475 },
+    { url = "https://files.pythonhosted.org/packages/7c/fc/6a8cb64e5f0324877d503c854da15d76c1e50eb722e320b15345c4d0c6de/cffi-1.17.1-cp313-cp313-win_amd64.whl", hash = "sha256:f6a16c31041f09ead72d69f583767292f750d24913dadacf5756b966aacb3f1a", size = 182009 },
 ]
 
 [[package]]
@@ -179,6 +200,18 @@ wheels = [
 ]
 
 [[package]]
+name = "clr-loader"
+version = "0.2.7.post0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "cffi", marker = "sys_platform != 'linux'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d5/b3/8ae917e458394e2cebdbf17bed0a8204f8d4ffc79a093a7b1141c7731d3c/clr_loader-0.2.7.post0.tar.gz", hash = "sha256:b7a8b3f8fbb1bcbbb6382d887e21d1742d4f10b5ea209e4ad95568fe97e1c7c6", size = 56701 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/9c/c0/06e64a54bced4e8b885c1e7ec03ee1869e52acf69e87da40f92391a214ad/clr_loader-0.2.7.post0-py3-none-any.whl", hash = "sha256:e0b9fcc107d48347a4311a28ffe3ae78c4968edb216ffb6564cb03f7ace0bb47", size = 50649 },
+]
+
+[[package]]
 name = "colorama"
 version = "0.4.6"
 source = { registry = "https://pypi.org/simple" }
@@ -220,8 +253,8 @@ name = "dmgbuild"
 version = "1.6.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "ds-store" },
-    { name = "mac-alias" },
+    { name = "ds-store", marker = "sys_platform != 'linux'" },
+    { name = "mac-alias", marker = "sys_platform != 'linux'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/16/93/b9702c68d5dedfd6b91c76268a89091ff681b8e3b9a026e7919b6ab730a4/dmgbuild-1.6.5.tar.gz", hash = "sha256:c5cbeec574bad84a324348aa7c36d4aada04568c99fb104dec18d22ba3259f45", size = 36848 }
 wheels = [
@@ -233,11 +266,24 @@ name = "ds-store"
 version = "1.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "mac-alias" },
+    { name = "mac-alias", marker = "sys_platform != 'linux'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/7c/36/902259bf7ddb142dd91cf7a9794aa15e1a8ab985974f90375e5d3463b441/ds_store-1.3.1.tar.gz", hash = "sha256:c27d413caf13c19acb85d75da4752673f1f38267f9eb6ba81b3b5aa99c2d207c", size = 27052 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/47/bf/b1c10362a0d670ee8ae086d92c3ab795fca2a927e4ff25e7cd15224d3863/ds_store-1.3.1-py3-none-any.whl", hash = "sha256:fbacbb0bd5193ab3e66e5a47fff63619f15e374ffbec8ae29744251a6c8f05b5", size = 16268 },
+]
+
+[[package]]
+name = "fonttools"
+version = "4.57.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/03/2d/a9a0b6e3a0cf6bd502e64fc16d894269011930cabfc89aee20d1635b1441/fonttools-4.57.0.tar.gz", hash = "sha256:727ece10e065be2f9dd239d15dd5d60a66e17eac11aea47d447f9f03fdbc42de", size = 3492448 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/cb/98/d4bc42d43392982eecaaca117d79845734d675219680cd43070bb001bc1f/fonttools-4.57.0-cp312-cp312-macosx_10_13_universal2.whl", hash = "sha256:889e45e976c74abc7256d3064aa7c1295aa283c6bb19810b9f8b604dfe5c7f31", size = 2751824 },
+    { url = "https://files.pythonhosted.org/packages/1a/62/7168030eeca3742fecf45f31e63b5ef48969fa230a672216b805f1d61548/fonttools-4.57.0-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:0425c2e052a5f1516c94e5855dbda706ae5a768631e9fcc34e57d074d1b65b92", size = 2283072 },
+    { url = "https://files.pythonhosted.org/packages/e9/2f/11439f3af51e4bb75ac9598c29f8601aa501902dcedf034bdc41f47dd799/fonttools-4.57.0-cp313-cp313-macosx_10_13_universal2.whl", hash = "sha256:408ce299696012d503b714778d89aa476f032414ae57e57b42e4b92363e0b8ef", size = 2739175 },
+    { url = "https://files.pythonhosted.org/packages/25/52/677b55a4c0972dc3820c8dba20a29c358197a78229daa2ea219fdb19e5d5/fonttools-4.57.0-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:bbceffc80aa02d9e8b99f2a7491ed8c4a783b2fc4020119dc405ca14fb5c758c", size = 2276583 },
+    { url = "https://files.pythonhosted.org/packages/90/27/45f8957c3132917f91aaa56b700bcfc2396be1253f685bd5c68529b6f610/fonttools-4.57.0-py3-none-any.whl", hash = "sha256:3122c604a675513c68bd24c6a8f9091f1c2376d18e8f5fe5a101746c81b3e98f", size = 1093605 },
 ]
 
 [[package]]
@@ -471,8 +517,11 @@ wheels = [
 
 [[package]]
 name = "pixi-manga-manager"
-version = "0.1.0"
+version = "0.1.0a1"
 source = { virtual = "." }
+dependencies = [
+    { name = "toga" },
+]
 
 [package.dev-dependencies]
 dev = [
@@ -485,6 +534,7 @@ dev = [
 ]
 
 [package.metadata]
+requires-dist = [{ name = "toga" }]
 
 [package.metadata.requires-dev]
 dev = [
@@ -521,6 +571,29 @@ wheels = [
 ]
 
 [[package]]
+name = "pycairo"
+version = "1.28.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/40/d9/412da520de9052b7e80bfc810ec10f5cb3dbfa4aa3e23c2820dc61cdb3d0/pycairo-1.28.0.tar.gz", hash = "sha256:26ec5c6126781eb167089a123919f87baa2740da2cca9098be8b3a6b91cc5fbc", size = 662477 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a9/d7/206d7945aac5c6c889e7fea4011410d1311455a1d8dfce66106d8d700b7f/pycairo-1.28.0-cp312-cp312-win32.whl", hash = "sha256:c00cfbb7f30eb7ca1d48886712932e2d91e8835a8496f4e423878296ceba573e", size = 750594 },
+    { url = "https://files.pythonhosted.org/packages/2e/ba/259fc9a4d3afdad1e5b9db52b9d8a5df67f70dd787167185e8ec8a1af007/pycairo-1.28.0-cp312-cp312-win_amd64.whl", hash = "sha256:d50d190f5033992b55050b9f337ee42a45c3568445d5e5d7987bab96c278d8a6", size = 841767 },
+    { url = "https://files.pythonhosted.org/packages/c0/08/aa0903612ea0e8686ad6af58d4fb9cbab8ee0b0831201cddf7abd578d045/pycairo-1.28.0-cp312-cp312-win_arm64.whl", hash = "sha256:957e0340ee1c279d197d4f7cfa96f6d8b48e453eec711fca999748d752468ff4", size = 691687 },
+    { url = "https://files.pythonhosted.org/packages/59/a7/c3e5ed55781dfe1b31eb4a2482aeae707671f3d36b0ea53a1722f4a3dfe9/pycairo-1.28.0-cp313-cp313-win32.whl", hash = "sha256:d13352429d8a08a1cb3607767d23d2fb32e4c4f9faa642155383980ec1478c24", size = 750594 },
+    { url = "https://files.pythonhosted.org/packages/8b/1c/ebadd290748aff3b6bc35431114d41e7a42f40a4b988c2aaf2dfed5d8156/pycairo-1.28.0-cp313-cp313-win_amd64.whl", hash = "sha256:082aef6b3a9dcc328fa648d38ed6b0a31c863e903ead57dd184b2e5f86790140", size = 841774 },
+    { url = "https://files.pythonhosted.org/packages/3e/ce/a3f5f1946613cd8a4654322b878c59f273c6e9b01dfadadd3f609070e0b9/pycairo-1.28.0-cp313-cp313-win_arm64.whl", hash = "sha256:026afd53b75291917a7412d9fe46dcfbaa0c028febd46ff1132d44a53ac2c8b6", size = 691675 },
+]
+
+[[package]]
+name = "pycparser"
+version = "2.22"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/1d/b2/31537cf4b1ca988837256c910a668b553fceb8f069bedc4b1c826024b52c/pycparser-2.22.tar.gz", hash = "sha256:491c8be9c040f5390f5bf44a5b07752bd07f56edf992381b05c701439eec10f6", size = 172736 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/13/a3/a812df4e2dd5696d1f351d58b8fe16a405b234ad2886a0dab9183fb78109/pycparser-2.22-py3-none-any.whl", hash = "sha256:c3702b6d3dd8c7abc1afa565d7e63d53a1d0bd86cdc24edd75470f4de499cfcc", size = 117552 },
+]
+
+[[package]]
 name = "pygments"
 version = "2.19.1"
 source = { registry = "https://pypi.org/simple" }
@@ -528,6 +601,15 @@ sdist = { url = "https://files.pythonhosted.org/packages/7c/2d/c3338d48ea6cc0feb
 wheels = [
     { url = "https://files.pythonhosted.org/packages/8a/0b/9fcc47d19c48b59121088dd6da2488a49d5f72dacf8262e2790a1d2c7d15/pygments-2.19.1-py3-none-any.whl", hash = "sha256:9ea1544ad55cecf4b8242fab6dd35a93bbce657034b0611ee383099054ab6d8c", size = 1225293 },
 ]
+
+[[package]]
+name = "pygobject"
+version = "3.52.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pycairo", marker = "'freebsd' in sys_platform or sys_platform == 'linux'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/4a/36/fec530a313d3d48f12e112ac0a65ee3ccc87f385123a0493715609e8e99c/pygobject-3.52.3.tar.gz", hash = "sha256:00e427d291e957462a8fad659a9f9c8be776ff82a8b76bdf402f1eaeec086d82", size = 1235825 }
 
 [[package]]
 name = "pylint"
@@ -578,6 +660,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/87/c7/5e1547c44e31da50a460df93af11a535ace568ef89d7a811069ead340c4a/python-slugify-8.0.4.tar.gz", hash = "sha256:59202371d1d05b54a9e7720c5e038f928f45daaffe41dd10822f3907b937c856", size = 10921 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a4/62/02da182e544a51a5c3ccf4b03ab79df279f9c60c5e82d5e8bec7ca26ac11/python_slugify-8.0.4-py2.py3-none-any.whl", hash = "sha256:276540b79961052b66b7d116620b36518847f52d5fd9e3a70164fc8c50faa6b8", size = 10051 },
+]
+
+[[package]]
+name = "pythonnet"
+version = "3.0.5"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "clr-loader", marker = "sys_platform != 'linux'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/9a/d6/1afd75edd932306ae9bd2c2d961d603dc2b52fcec51b04afea464f1f6646/pythonnet-3.0.5.tar.gz", hash = "sha256:48e43ca463941b3608b32b4e236db92d8d40db4c58a75ace902985f76dac21cf", size = 239212 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/cd/f1/bfb6811df4745f92f14c47a29e50e89a36b1533130fcc56452d4660bd2d6/pythonnet-3.0.5-py3-none-any.whl", hash = "sha256:f6702d694d5d5b163c9f3f5cc34e0bed8d6857150237fae411fefb883a656d20", size = 297506 },
 ]
 
 [[package]]
@@ -632,6 +726,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/ab/3a/0316b28d0761c6734d6bc14e770d85506c986c85ffb239e688eeaab2c2bc/rich-13.9.4.tar.gz", hash = "sha256:439594978a49a09530cff7ebc4b5c7103ef57baf48d5ea3184f21d9a2befa098", size = 223149 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/19/71/39c7c0d87f8d4e6c020a393182060eaefeeae6c01dab6a84ec346f2567df/rich-13.9.4-py3-none-any.whl", hash = "sha256:6049d5e6ec054bf2779ab3358186963bac2ea89175919d699e378b99738c2a90", size = 242424 },
+]
+
+[[package]]
+name = "rubicon-objc"
+version = "0.5.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/d3/13/586c9baa985eae0f718029506b40ca41295d51a546567414b2bcf8ccacef/rubicon_objc-0.5.0.tar.gz", hash = "sha256:18f075649780d95df53d483642068c767d7d2cfbbf075ddef124a44b40b6d92e", size = 173652 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/6d/30/5b2407b8762ed882e5732e19c485b9ea2f07d35462615a3212638bab66c2/rubicon_objc-0.5.0-py3-none-any.whl", hash = "sha256:a9c2a605120d6e5be327d3f42a71b60963125987e116f51846757b5e110854fa", size = 62711 },
 ]
 
 [[package]]
@@ -702,6 +805,114 @@ wheels = [
 ]
 
 [[package]]
+name = "toga"
+version = "0.5.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "toga-android", marker = "sys_platform == 'android'" },
+    { name = "toga-cocoa", marker = "sys_platform == 'darwin'" },
+    { name = "toga-gtk", marker = "'freebsd' in sys_platform or sys_platform == 'linux'" },
+    { name = "toga-ios", marker = "sys_platform == 'ios'" },
+    { name = "toga-web", marker = "sys_platform == 'emscripten'" },
+    { name = "toga-winforms", marker = "sys_platform == 'win32'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b0/a7/e7bbeeb1d208f464d609a4314f5ef13fddba93ad502f85d4227aee82b460/toga-0.5.0.tar.gz", hash = "sha256:aa761f602d5f2ad7a01f6ff3a00c712cf09754bf19409c2b8b8f3221a4db0bc5", size = 3854 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/34/85/af2475af81a4901a843f0812a43fc7a372f16db0929b5844548429b0cf78/toga-0.5.0-py3-none-any.whl", hash = "sha256:061bb843da0225e19b5911609502986df9ff361aaa18b91541fbb11d6d5bbe32", size = 3310 },
+]
+
+[[package]]
+name = "toga-android"
+version = "0.5.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "toga-core", marker = "sys_platform != 'linux'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/37/8d/63661672350034d0e11630470071eccd022ec1ec12d09712f24dd413369e/toga_android-0.5.0.tar.gz", hash = "sha256:f6a61670318f54d5384bdbeed08f7fb6299358fef0990980ba4d14dcb00d5ec9", size = 74612 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/75/2f/6d8c7f3e9c0c210c8703b672d6089fda065a3a34b115c77e1aaf95fc6476/toga_android-0.5.0-py3-none-any.whl", hash = "sha256:d69dd770fc1b12ef8f843d460320051d83846f8fd650c41b34e9e09c97b058fd", size = 69021 },
+]
+
+[[package]]
+name = "toga-cocoa"
+version = "0.5.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "fonttools", marker = "sys_platform != 'linux'" },
+    { name = "rubicon-objc", marker = "sys_platform != 'linux'" },
+    { name = "toga-core", marker = "sys_platform != 'linux'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/07/d2/a758b8bda75b9ad934679f0556938047ebd6810c4eaa2797f53ab02080c8/toga_cocoa-0.5.0.tar.gz", hash = "sha256:1d77da512cc43f219d0ef82735f873857aeedf232017275f35c02dbc1b664056", size = 468603 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/eb/86/47473b58ef585419cbbd795ab08bbdf79424d074fa01002c8a97306661e2/toga_cocoa-0.5.0-py3-none-any.whl", hash = "sha256:bd94bd9ee1e66675591e354f09f598b77978ff4b6f745d5062b8f376b71a250f", size = 465214 },
+]
+
+[[package]]
+name = "toga-core"
+version = "0.5.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "travertino" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/75/de/44a0f460a5aa0be5ae5fd77f5d570afa5b20f864e9eeca82ad85774145a7/toga_core-0.5.0.tar.gz", hash = "sha256:5414a78a1554354ef360286b20f12f999a04842eea81833446eb063c35e8b3da", size = 1015874 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3c/e1/56adef453fac6741c111c445c44941827db0e0046336f165bd2c318bc4a8/toga_core-0.5.0-py3-none-any.whl", hash = "sha256:12e3930b2cc9a85d3cddb50cf16e22f3112b976bb920923b1d7445d0c00e084b", size = 142977 },
+]
+
+[[package]]
+name = "toga-gtk"
+version = "0.5.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pycairo", marker = "'freebsd' in sys_platform or sys_platform == 'linux'" },
+    { name = "pygobject", marker = "'freebsd' in sys_platform or sys_platform == 'linux'" },
+    { name = "toga-core", marker = "'freebsd' in sys_platform or sys_platform == 'linux'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/42/c5/c3b03436f6fe089b3fed202e46c369246aa2e17a7901d4330e0537e17af5/toga_gtk-0.5.0.tar.gz", hash = "sha256:3abb84df6f84d5f4747fc5f6baf50055a8e34c3dc4bd4a7eb9f10224f52bb1b2", size = 74929 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/6d/47/fe663987a17fe61713121ad532fe629ad6c0199bbeae8e60b23aaa984da5/toga_gtk-0.5.0-py3-none-any.whl", hash = "sha256:955f5ca671d55a8203853ca164898353f01d71edd3bd98b7841ff8c6f3245be3", size = 70857 },
+]
+
+[[package]]
+name = "toga-ios"
+version = "0.5.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "fonttools", marker = "sys_platform != 'linux'" },
+    { name = "rubicon-objc", marker = "sys_platform != 'linux'" },
+    { name = "toga-core", marker = "sys_platform != 'linux'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/51/e9/baa8a94dcc0a5d2ad85170914040dab2cbcab3194830d602ab97c510f467/toga_ios-0.5.0.tar.gz", hash = "sha256:c595be77c4141f0c6b514b9111926299e25b647d5669b909f34701c45848b2c4", size = 439378 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0d/b3/918a0ad43826a1b6f237ab8090f1d7bded6023e707ee168c73e6d49ca993/toga_ios-0.5.0-py3-none-any.whl", hash = "sha256:67373aca9f8b3faad745cd46b0335dcae2e949cba2c6f8be06d89ca147ca5a95", size = 436701 },
+]
+
+[[package]]
+name = "toga-web"
+version = "0.5.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "toga-core", marker = "sys_platform != 'linux'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/7a/3b/5fe69e91836445ad7a014b14969931a3e8e42cba49c62a0df1f75990df8c/toga_web-0.5.0.tar.gz", hash = "sha256:ecae5d593fdb175440ed01840e48c6bbb15a2640936e94a9b28393fe4ca360a0", size = 16624 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ce/a5/ca224dbd6235086f89d38226691aa817653a8b22c54886f660e7ae76db04/toga_web-0.5.0-py3-none-any.whl", hash = "sha256:62a5a1f0f00205d93bbf5c0f32a252151497478d1da5b94c06c5e331cc8ac211", size = 20508 },
+]
+
+[[package]]
+name = "toga-winforms"
+version = "0.5.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pythonnet", marker = "sys_platform != 'linux'" },
+    { name = "toga-core", marker = "sys_platform != 'linux'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/0a/65/a051a4e9f481579cafc51e29cd268f91ce63e6cc27b02f869c76a40a5dbd/toga_winforms-0.5.0.tar.gz", hash = "sha256:507bbc484077653a88c81a1e3d5a2a06411015cbfdafd6175fda482394420321", size = 460115 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/46/9a/ef0229439386373fba1c2024a50e0d6c5cef47cf04b411e410baba6a4514/toga_winforms-0.5.0-py3-none-any.whl", hash = "sha256:e23af9e3d17b09fc477b59368db124361599a0920af1e36de3608ac9705f6433", size = 460636 },
+]
+
+[[package]]
 name = "tomli-w"
 version = "1.2.0"
 source = { registry = "https://pypi.org/simple" }
@@ -717,6 +928,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/b1/09/a439bec5888f00a54b8b9f05fa94d7f901d6735ef4e55dcec9bc37b5d8fa/tomlkit-0.13.2.tar.gz", hash = "sha256:fff5fe59a87295b278abd31bec92c15d9bc4a06885ab12bcea52c71119392e79", size = 192885 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f9/b6/a447b5e4ec71e13871be01ba81f5dfc9d0af7e473da256ff46bc0e24026f/tomlkit-0.13.2-py3-none-any.whl", hash = "sha256:7a974427f6e119197f670fbbbeae7bef749a6c14e793db934baefc1b5f03efde", size = 37955 },
+]
+
+[[package]]
+name = "travertino"
+version = "0.5.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/ec/6a/130d6ac137c98fdabf1eb2e93756d7fab66dafbe607c5452027b3debc400/travertino-0.5.0.tar.gz", hash = "sha256:7d3b6436e8e09ee5f7c8be26d6cb1f09030be765fca918b05b6e184b802107c1", size = 43811 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/6b/5a/9fbb3c535b8bf3e0cee4cd80faef3643333c478dfa00cc2806dd7f7cbe34/travertino-0.5.0-py3-none-any.whl", hash = "sha256:fbc2f19bd1d603cb5f8dc279b24a68bc5e5e8db548dc1db1cb96bd18387e61a1", size = 24367 },
 ]
 
 [[package]]
