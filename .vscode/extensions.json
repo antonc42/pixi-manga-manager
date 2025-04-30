@@ -1,0 +1,13 @@
+{
+    "recommendations": [
+        "tamasfe.even-better-toml",
+        "ms-python.black-formatter",
+        "ms-python.isort",
+        "matangover.mypy",
+        "ms-python.vscode-pylance",
+        "ms-python.pylint",
+        "ms-python.python",
+        "redhat.vscode-yaml",
+        "skellock.just"
+    ]
+}
